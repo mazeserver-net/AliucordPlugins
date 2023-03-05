@@ -53,9 +53,9 @@ fun addPatches(patcher: PatcherAPI) {
         if (Themer.mSettings.enableFontHook) patchGetFont()
 
         if (Themer.mSettings.customSounds) patchOpenRawResource()
-
+ache
         //patchGetColor()
-        patchSetColor()
+        //patchSetColor()
         patchColorStateLists()
         tintDrawables()
         themeAttributes()
