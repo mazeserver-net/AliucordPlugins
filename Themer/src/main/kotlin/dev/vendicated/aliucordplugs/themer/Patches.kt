@@ -68,7 +68,7 @@ fun addPatches(patcher: PatcherAPI) {
     }
 }
 
-val backgroundId = View.generateViewId()
+/*val backgroundId = View.generateViewId()
 private fun setBackground(view: View, parent: ViewGroup = view as ViewGroup) {
     if (ResourceManager.animatedBgUri != null) {
         if (parent is FragmentContainerView || parent.findViewById<View>(backgroundId) != null) return
@@ -89,9 +89,9 @@ private fun setBackground(view: View, parent: ViewGroup = view as ViewGroup) {
     } else if (ResourceManager.customBg != null) {
         view.background = ResourceManager.customBg
     }
-}
+}*/
 
-private fun PatcherAPI.setBackgrounds() {
+/*private fun PatcherAPI.setBackgrounds() {
     val chatId = Utils.getResId("panel_center", "id")
 
     val id = View.generateViewId()
@@ -110,7 +110,7 @@ private fun PatcherAPI.setBackgrounds() {
             if (cName == "com.discord.widgets.user.search.WidgetGlobalSearch" ||
                 cName == "com.discord.widgets.user.WidgetUserMentions"
             ) {
-                setBackground(view)
+                //setBackground(view)
                 // Add darken overlay
                 (view as ViewGroup).addView(
                     View(view.context).apply {
@@ -132,7 +132,7 @@ private fun PatcherAPI.setBackgrounds() {
                 view = view.parent as View
             }
 
-            setBackground(view)
+            //setBackground(view)
 
             val shouldDarken =
                 cName == "com.discord.widgets.debugging.WidgetDebugging" ||
@@ -195,7 +195,7 @@ private fun PatcherAPI.setBackgrounds() {
                     view = view.parent as View
                     if (view.id == chatBgId) view.background = null
                 }
-                setBackground(view)
+                //setBackground(view)
             } else if (
                 transparencyMode == TransparencyMode.CHAT_SETTINGS && (className.lowercase()
                     .contains("settings") || SettingsPage::class.java.isAssignableFrom(clazz))
@@ -203,12 +203,12 @@ private fun PatcherAPI.setBackgrounds() {
                 if (ResourceManager.animatedBgUri != null)
                     logger.warn("Animated backgrounds aren't supported on the Chat & Settings setting")
                 else
-                    setBackground(view)
+                    //setBackground(view)
             }
         })
 
     }
-}
+}*/
 
 // This patch somehow causes crashes for some people, I don't get it
 @SuppressLint("RestrictedApi")
