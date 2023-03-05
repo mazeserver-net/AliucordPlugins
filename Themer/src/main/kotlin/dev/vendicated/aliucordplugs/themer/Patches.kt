@@ -54,7 +54,7 @@ fun addPatches(patcher: PatcherAPI) {
 
         if (Themer.mSettings.customSounds) patchOpenRawResource()
 
-        patchGetColor()
+        //patchGetColor()
         patchSetColor()
         patchColorStateLists()
         tintDrawables()
