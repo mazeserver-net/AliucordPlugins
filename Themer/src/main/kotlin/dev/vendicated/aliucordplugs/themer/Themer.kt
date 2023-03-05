@@ -46,7 +46,7 @@ class Themer : Plugin() {
         mSettings = settings
         addPatches(patcher)
         //ResourceManager.init(ctx)
-        //ThemeLoader.loadThemes(true)
+        ThemeLoader.loadThemes(true)
 
         // fixme
         patcher.patch(com.aliucord.Main::class.java.getDeclaredMethod("crashHandler", Thread::class.java, Throwable::class.java), PreHook {
