@@ -246,7 +246,7 @@ private fun PatcherAPI.patchOpenRawResource() {
     )
 }
 
-private fun PatcherAPI.patchGetColor() {
+/*private fun PatcherAPI.patchGetColor() {
     patch(Resources::class.java.getDeclaredMethod("getColor", Int::class.javaPrimitiveType, Resources.Theme::class.java),
         PreHook { param ->
             ResourceManager.getColorForId(param.args[0] as Int)?.let {
@@ -254,7 +254,7 @@ private fun PatcherAPI.patchGetColor() {
             }
         }
     )
-}
+}*/
 
 private fun PatcherAPI.patchSetColor() {
     patch(
