@@ -50,9 +50,9 @@ fun addPatches(patcher: PatcherAPI) {
     patcher.run {
         //if (Themer.mSettings.transparencyMode != TransparencyMode.NONE) setBackgrounds()
 
-        if (Themer.mSettings.enableFontHook) patchGetFont()
+        //if (Themer.mSettings.enableFontHook) patchGetFont()
 
-        if (Themer.mSettings.customSounds) patchOpenRawResource()
+        //if (Themer.mSettings.customSounds) patchOpenRawResource()
 
         //patchGetColor()
         //patchSetColor()
@@ -61,154 +61,14 @@ fun addPatches(patcher: PatcherAPI) {
         themeAttributes()
         themeStatusBar()
         themeTextInput()
-        addDownloadButton()
+        //addDownloadButton()
 
         // Set text colour of transparency options in colour picker
-        patchColorPicker()
+        //patchColorPicker()
     }
 }
 
-/*val backgroundId = View.generateViewId()
-private fun setBackground(view: View, parent: ViewGroup = view as ViewGroup) {
-    if (ResourceManager.animatedBgUri != null) {
-        if (parent is FragmentContainerView || parent.findViewById<View>(backgroundId) != null) return
 
-        SimpleDraweeView(parent.context).run {
-            this.id = backgroundId
-            layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-            controller = b.f.g.a.a.b.a().run //  Fresco.newDraweeControllerBuilder()  {
-                f(ResourceManager.animatedBgUri) // setUri(Uri)
-                m = true // mAutoPlayAnimations
-                a() // build()
-            }
-            parent.addView(this, 0)
-        }
-
-        if (ResourceManager.overlayAlpha != 0)
-            view.background = ColorDrawable(ColorUtils.setAlphaComponent(Color.BLACK, ResourceManager.overlayAlpha))
-    } else if (ResourceManager.customBg != null) {
-        view.background = ResourceManager.customBg
-    }
-}*/
-
-/*private fun PatcherAPI.setBackgrounds() {
-    val chatId = Utils.getResId("panel_center", "id")
-
-    val id = View.generateViewId()
-
-    val transparencyMode = Themer.mSettings.transparencyMode
-    if (transparencyMode == TransparencyMode.FULL) {
-        val rootId = Utils.getResId("action_bar_root", "id")
-        patch(AppFragment::class.java.getDeclaredMethod("onViewBound", View::class.java), Hook { param ->
-            if (ResourceManager.customBg == null && ResourceManager.animatedBgUri == null) return@Hook
-            var view = param.args[0] as View
-            val clazz = param.thisObject::class.java
-            val cName = clazz.name
-
-            // Discord uses a dialog to show these which makes it so that the chat still shows underneath which makes these
-            // unreadable. Thus set their background to the wallpaper
-            if (cName == "com.discord.widgets.user.search.WidgetGlobalSearch" ||
-                cName == "com.discord.widgets.user.WidgetUserMentions"
-            ) {
-                //setBackground(view)
-                // Add darken overlay
-                (view as ViewGroup).addView(
-                    View(view.context).apply {
-                        layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-                        background = ColorDrawable().apply {
-                            color = ColorUtils.setAlphaComponent(Color.BLACK, 100)
-                        }
-                    }, if (ResourceManager.animatedBgUri != null) 1 else 0
-                )
-
-            }
-
-            // Two while loops to first find the root layout or return if it doesn't exist
-            // Then go even deeper to find the root root layout
-            while (view.id != rootId)
-                view = view.parent as View? ?: return@Hook
-            while (true) {
-                if (view.parent !is View) break
-                view = view.parent as View
-            }
-
-            //setBackground(view)
-
-            val shouldDarken =
-                cName == "com.discord.widgets.debugging.WidgetDebugging" ||
-                        cName == "com.discord.widgets.search.WidgetSearch" ||
-                        cName.contains("setting", true) ||
-                        SettingsPage::class.java.isAssignableFrom(clazz)
-
-            // Add overlay to darken pages, as they would otherwise be too bright
-            if (shouldDarken) {
-                val parent = (param.args[0] as View).parent as ViewGroup
-                if (parent !is FragmentContainerView && parent.findViewById<View>(id) == null)
-                    parent.addView(
-                        View(view.context).apply {
-                            this.id = id
-                            layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-                            background = ColorDrawable().apply {
-                                color = ColorUtils.setAlphaComponent(Color.BLACK, 100)
-                            }
-                        }, 0
-                    )
-            }
-        })
-
-        // Patch for BottomSheet transparency
-        patch(AppBottomSheet::class.java.getDeclaredMethod("onViewCreated", View::class.java, Bundle::class.java), Hook {
-            ((it.args[0] as View).parent as View).background = null
-        })
-
-        // Fix attachment/embed spoiler overlay being transparent
-
-        val cfgAt =
-            WidgetChatListAdapterItemAttachment::class.java.getDeclaredMethod("configureUI", WidgetChatListAdapterItemAttachment.Model::class.java)
-        patch(cfgAt, PreHook { cf ->
-            val binding = WidgetChatListAdapterItemAttachment.`access$getBinding$p`(cf.thisObject as WidgetChatListAdapterItemAttachment)
-            binding.root.findViewById<View?>(Utils.getResId("chat_list_item_attachment_spoiler", "id"))?.let {
-                val bgColor = (it.background as ColorDrawable?)?.color ?: return@let
-                it.setBackgroundColor(ColorUtils.setAlphaComponent(bgColor, 0xFF))
-            }
-        })
-
-        val cfgEm =
-            WidgetChatListAdapterItemEmbed::class.java.getDeclaredMethod("configureUI", WidgetChatListAdapterItemEmbed.Model::class.java)
-        patch(cfgEm, PreHook { cf ->
-            val binding = ReflectUtils.getField(cf.thisObject, "binding") as WidgetChatListAdapterItemEmbedBinding
-            binding.root.findViewById<View?>(Utils.getResId("chat_list_item_embed_spoiler", "id"))?.let {
-                val bgColor = (it.background as ColorDrawable?)?.color ?: return@let
-                it.setBackgroundColor(ColorUtils.setAlphaComponent(bgColor, 0xFF))
-            }
-        })
-    } else {
-        val chatBgId = Utils.getResId("widget_home_panel_center_chat", "id")
-
-        patch(AppFragment::class.java.getDeclaredMethod("onViewBound", View::class.java), Hook { param ->
-            if (ResourceManager.customBg == null && ResourceManager.animatedBgUri == null) return@Hook
-            val clazz = param.thisObject.javaClass
-            val className = clazz.simpleName
-            var view = param.args[0] as View
-            if (className == "WidgetChatList") {
-                while (view.id != chatId) {
-                    view = view.parent as View
-                    if (view.id == chatBgId) view.background = null
-                }
-                //setBackground(view)
-            } else if (
-                transparencyMode == TransparencyMode.CHAT_SETTINGS && (className.lowercase()
-                    .contains("settings") || SettingsPage::class.java.isAssignableFrom(clazz))
-            ) {
-                if (ResourceManager.animatedBgUri != null)
-                    logger.warn("Animated backgrounds aren't supported on the Chat & Settings setting")
-                else
-                    //setBackground(view)
-            }
-        })
-
-    }
-}*/
 
 // This patch somehow causes crashes for some people, I don't get it
 @SuppressLint("RestrictedApi")
@@ -337,7 +197,7 @@ private fun PatcherAPI.themeTextInput() {
 const val THEME_DEV_CHANNEL = 868419532992172073L
 const val THEME_SUPPORT_CHANNEL = 875213883776847873L
 
-@SuppressLint("SetTextI18n")
+/*@SuppressLint("SetTextI18n")
 private fun PatcherAPI.addDownloadButton() {
     val emojiTrayId = Utils.getResId("dialog_chat_actions_add_reaction_emojis_list", "id")
     val id = View.generateViewId()
@@ -408,7 +268,7 @@ private fun PatcherAPI.addDownloadButton() {
                 }
             }
         })
-}
+}*/
 
 private fun PatcherAPI.patchColorPicker() {
     /*
