@@ -58,9 +58,9 @@ fun addPatches(patcher: PatcherAPI) {
         //patchSetColor()
         //patchColorStateLists()
         //tintDrawables()
-        //themeAttributes()
-        themeStatusBar()
-        themeTextInput()
+        themeAttributes()
+        //themeStatusBar()
+        //themeTextInput()
         //addDownloadButton()
 
         // Set text colour of transparency options in colour picker
