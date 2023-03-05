@@ -53,6 +53,7 @@ object ResourceManager {
         }
     }
 
+
     fun clean() {
         fonts.clear()
         colorsByName.clear()

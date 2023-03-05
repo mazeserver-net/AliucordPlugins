@@ -35,18 +35,18 @@ class Themer : Plugin() {
     }
 
     override fun start(ctx: Context) {
-        currentTheme = StoreStream.getUserSettingsSystem().theme
+        /*currentTheme = StoreStream.getUserSettingsSystem().theme
         subscription = StoreStream.getUserSettingsSystem().observeSettings(false).subscribe {
             if (currentTheme != theme) {
                 currentTheme = theme
                 initAttrMappings()
             }
-        }
+        }*/
         initAttrMappings()
         mSettings = settings
         addPatches(patcher)
         ResourceManager.init(ctx)
-        //ThemeLoader.loadThemes(true)
+        ThemeLoader.loadThemes(true)
 
         // fixme
         patcher.patch(com.aliucord.Main::class.java.getDeclaredMethod("crashHandler", Thread::class.java, Throwable::class.java), PreHook {
@@ -64,7 +64,7 @@ class Themer : Plugin() {
     }
 
     override fun stop(context: Context) {
-        subscription?.unsubscribe()
+        //subscription?.unsubscribe()
         patcher.unpatchAll()
         ResourceManager.clean()
         ThemeLoader.themes.clear()
