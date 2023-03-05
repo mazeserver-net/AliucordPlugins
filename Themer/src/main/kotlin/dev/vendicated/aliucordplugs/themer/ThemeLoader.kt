@@ -180,7 +180,7 @@ object ThemeLoader {
 
             val json = theme.json()
 
-            json.optJSONObject("background")?.run {
+            /*json.optJSONObject("background")?.run {
                 if (has("url")) {
                     val alpha = optInt("overlay_alpha", DEFAULT_OVERLAY_ALPHA)
                     if (alpha !in 0..0xFF)
@@ -249,7 +249,7 @@ object ThemeLoader {
                         "statusbar", "input_background", "blocked_bg" -> ResourceManager.putColor(it, v)
                     }
                 }
-            }
+            }*/
 
             json.optJSONObject("colors")?.run {
                 if (has("brand_500"))
@@ -264,11 +264,11 @@ object ThemeLoader {
                 }
             }
 
-            json.optJSONObject("drawable_tints")?.run {
+            /*json.optJSONObject("drawable_tints")?.run {
                 keys().forEach {
                     ResourceManager.putDrawableTint(it, parseColor(this, it))
                 }
-            }
+            }*/
 
         } catch (th: Throwable) {
             logger.error("Failed to load theme ${theme.name}", th)
