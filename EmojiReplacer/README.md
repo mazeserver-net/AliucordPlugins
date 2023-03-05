@@ -1,3 +1,0 @@
-# EmojiReplacer
-
- Unfinished. 
