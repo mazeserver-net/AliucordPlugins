@@ -87,7 +87,7 @@ class ThemerSettings : SettingsPage() {
         Button(ctx).apply {
             text = "Load missing themes"
             setOnClickListener {
-                ThemeLoader.loadThemes(false)
+                //ThemeLoader.loadThemes(false)
                 reRender()
             }
 
