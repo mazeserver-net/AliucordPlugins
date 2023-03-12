@@ -160,7 +160,7 @@ object ThemeLoader {
                     val theme = Theme(it)
                     themes.add(theme)
                     if (shouldLoad && theme.isEnabled) {
-                        loadTheme(theme)
+                        loadTheme()
                     }
                 } catch (th: Throwable) {
                     logger.error("Failed to load theme ${it.name}", th)
