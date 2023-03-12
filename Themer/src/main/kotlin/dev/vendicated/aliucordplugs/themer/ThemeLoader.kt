@@ -149,7 +149,7 @@ object ThemeLoader {
         } else v.toInt()
     }
 
-    fun loadThemes(shouldLoad: Boolean) {
+    /*fun loadThemes(shouldLoad: Boolean) {
         themes.clear()
 
         if (!THEME_DIR.exists() && !THEME_DIR.mkdirs()) throw RuntimeException("Failed to create Theme directory ${THEME_DIR.absolutePath}")
@@ -169,7 +169,7 @@ object ThemeLoader {
         }
 
         themes.sortBy { it.name }
-    }
+    }*/
 
 
     fun loadTheme(): Boolean {
