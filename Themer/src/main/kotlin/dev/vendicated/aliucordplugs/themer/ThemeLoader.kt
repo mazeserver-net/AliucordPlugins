@@ -175,8 +175,8 @@ object ThemeLoader {
     fun loadTheme(): Boolean {
         ResourceManager.overlayAlpha = 0
         try {
-            if (!theme.convertIfLegacy())
-                theme.update()
+            //if (!theme.convertIfLegacy())
+                //theme.update()
 
             //val json = theme.json()
             val json = JSONObject()
@@ -275,7 +275,7 @@ object ThemeLoader {
             }*/
 
         } catch (th: Throwable) {
-            logger.error("Failed to load theme ${theme.name}", th)
+            logger.error("Failed to load theme ", th)
             return false
         }
         return true
