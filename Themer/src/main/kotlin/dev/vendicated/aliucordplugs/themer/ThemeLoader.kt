@@ -39,7 +39,7 @@ object ThemeLoader {
         }
     }
 
-    private fun getResourceWithCache(theme: Theme, name: String, url: String): File {
+    /*private fun getResourceWithCache(theme: Theme, name: String, url: String): File {
         if (url.startsWith("file://"))
             return File(url.removePrefix("file://")).also {
                 if (!it.exists()) throw FileNotFoundException(it.absolutePath)
@@ -129,7 +129,7 @@ object ThemeLoader {
         } catch (th: Throwable) {
             theme.error("Failed to load background $url", th)
         }
-    }
+    }*/
 
 
     private fun parseColor(json: JSONObject, key: String): Int {
