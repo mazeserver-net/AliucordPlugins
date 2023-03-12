@@ -42,7 +42,7 @@ class Themer : Plugin() {
                 initAttrMappings()
             }
         }*/
-        //initAttrMappings()
+        initAttrMappings()
         mSettings = settings
         addPatches(patcher)
         ResourceManager.init(ctx)
@@ -67,9 +67,9 @@ class Themer : Plugin() {
     override fun stop(context: Context) {
         //subscription?.unsubscribe()
         patcher.unpatchAll()
-        ResourceManager.clean()
-        ThemeLoader.themes.clear()
-        Utils.appActivity.recreate()
+        //ResourceManager.clean()
+        //ThemeLoader.themes.clear()
+        //Utils.appActivity.recreate()
     }
 
     companion object {
