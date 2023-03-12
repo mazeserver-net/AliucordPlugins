@@ -172,13 +172,17 @@ object ThemeLoader {
     }
 
 
-    private fun loadTheme(theme: Theme): Boolean {
+    fun loadTheme(): Boolean {
         ResourceManager.overlayAlpha = 0
         try {
             if (!theme.convertIfLegacy())
                 theme.update()
 
-            val json = theme.json()
+            //val json = theme.json()
+            val json = JSONObject()
+            val colors = JSONObject()
+            colors.put("primary_630", -16777216)
+            json.put("colors", colors)
 
             /*json.optJSONObject("background")?.run {
                 if (has("url")) {
