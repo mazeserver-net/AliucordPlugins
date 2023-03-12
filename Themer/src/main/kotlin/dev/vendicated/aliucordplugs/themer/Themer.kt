@@ -42,7 +42,7 @@ class Themer : Plugin() {
                 initAttrMappings()
             }
         }*/
-        initAttrMappings()
+        //initAttrMappings()
         mSettings = settings
         addPatches(patcher)
         ResourceManager.init(ctx)
