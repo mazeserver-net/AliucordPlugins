@@ -60,7 +60,6 @@ class Theme(
         updaterUrl?.let {
             Utils.threadPool.execute {
                 try {
-                    verifyUntrustedUrl(it)
                     Http.Request(it).use { req ->
                         val res = req.execute().text()
                         val json = JSONObject(res)
