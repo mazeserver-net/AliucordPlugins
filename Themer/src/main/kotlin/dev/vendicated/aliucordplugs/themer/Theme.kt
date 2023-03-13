@@ -42,7 +42,7 @@ class Theme(
         }*/
     }
 
-    fun json() = JSONObject(file.readText())
+    /*fun json() = JSONObject(file.readText())
 
     private val prefsKey
         get() = "$name-enabled"
