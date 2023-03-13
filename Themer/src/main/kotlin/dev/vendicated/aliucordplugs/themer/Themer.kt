@@ -28,11 +28,11 @@ var currentTheme = ""
 
 @AliucordPlugin
 class Themer : Plugin() {
-    private var subscription: Subscription? = null
+    //private var subscription: Subscription? = null
 
-    init {
+    /*init {
         settingsTab = SettingsTab(ThemerSettings::class.java)
-    }
+    }*/
 
     override fun start(ctx: Context) {
         /*currentTheme = StoreStream.getUserSettingsSystem().theme
@@ -43,14 +43,14 @@ class Themer : Plugin() {
             }
         }*/
         initAttrMappings()
-        mSettings = settings
+        //mSettings = settings
         addPatches(patcher)
         ResourceManager.init(ctx)
         //ThemeLoader.loadThemes(true)
         ThemeLoader.loadTheme()
 
         // fixme
-        patcher.patch(com.aliucord.Main::class.java.getDeclaredMethod("crashHandler", Thread::class.java, Throwable::class.java), PreHook {
+        /*patcher.patch(com.aliucord.Main::class.java.getDeclaredMethod("crashHandler", Thread::class.java, Throwable::class.java), PreHook {
             // Ignore thread exceptions
             if (Looper.getMainLooper().thread != it.args[0]) return@PreHook
             val ex = it.args[1] as? Resources.NotFoundException ?: return@PreHook
@@ -61,7 +61,7 @@ class Themer : Plugin() {
                     settings.fontHookCausedCrash = true
                 }
             }
-        })
+        })*/
     }
 
     override fun stop(context: Context) {
@@ -72,7 +72,7 @@ class Themer : Plugin() {
         //Utils.appActivity.recreate()
     }
 
-    companion object {
+    /*companion object {
         lateinit var mSettings: SettingsAPI
-    }
+    }*/
 }
