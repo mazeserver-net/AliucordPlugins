@@ -24,22 +24,22 @@ class ThemeException(override val message: String) : IOException(message)
 class Theme(
     val file: File
 ) {
-    var name: String
+    /*var name: String
     var author: String = "Anonymous"
     var version: String = "1.0.0"
     var license: String? = null
     private var updaterUrl: String? = null
-
-    init {
+*/
+    /*init {
         name = file.name.removeSuffix(".json")
         val json = json()
-        (json.optJSONObject("manifest") ?: json /* legacy format */).run {
+        (json.optJSONObject("manifest") ?: json ).run {
             if (has("name")) name = getString("name")
             if (has("author")) author = getString("author")
             if (has("version")) version = getString("version")
             if (has("license")) license = getString("license")
             if (has("updater")) updaterUrl = getString("updater")
-        }
+        }*/
     }
 
     fun json() = JSONObject(file.readText())
