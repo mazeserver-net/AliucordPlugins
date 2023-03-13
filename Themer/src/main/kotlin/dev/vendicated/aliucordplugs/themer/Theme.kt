@@ -47,9 +47,6 @@ class Theme(
     private val prefsKey
         get() = "$name-enabled"
 
-    var isEnabled
-        get() = Themer.mSettings.getBool(prefsKey, false)
-        set(v) = Themer.mSettings.setBool(prefsKey, v)
 
     fun convertIfLegacy(): Boolean {
         val json = json()

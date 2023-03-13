@@ -20,7 +20,6 @@ import com.aliucord.entities.Plugin
 import com.aliucord.patcher.PreHook
 import com.aliucord.utils.RxUtils.subscribe
 import com.discord.stores.StoreStream
-import dev.vendicated.aliucordplugs.themer.settings.ThemerSettings
 import rx.Subscription
 
 val logger = Logger("Themer")
